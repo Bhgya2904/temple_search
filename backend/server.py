@@ -381,7 +381,7 @@ async def get_trip_plan(trip_id: str):
     trip = await trips_collection.find_one({"id": trip_id})
     if not trip:
         raise HTTPException(status_code=404, detail="Trip plan not found")
-    return trip
+    return serialize_doc(trip)
 
 if __name__ == "__main__":
     import uvicorn
