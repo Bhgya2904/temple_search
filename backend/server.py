@@ -36,6 +36,23 @@ trips_collection = db["trips"]
 # AI Integration
 EMERGENT_LLM_KEY = os.environ.get("EMERGENT_LLM_KEY")
 
+# Helper function to convert ObjectId to string
+def serialize_doc(doc):
+    """Convert MongoDB document to JSON serializable format"""
+    if doc is None:
+        return None
+    if isinstance(doc, list):
+        return [serialize_doc(item) for item in doc]
+    if isinstance(doc, dict):
+        for key, value in doc.items():
+            if isinstance(value, ObjectId):
+                doc[key] = str(value)
+            elif isinstance(value, dict):
+                doc[key] = serialize_doc(value)
+            elif isinstance(value, list):
+                doc[key] = serialize_doc(value)
+    return doc
+
 # Pydantic models
 class Temple(BaseModel):
     id: str
