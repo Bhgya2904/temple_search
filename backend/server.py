@@ -240,7 +240,7 @@ async def search_temples(q: str = "", state: str = "", deity: str = ""):
         query["deity"] = {"$regex": deity, "$options": "i"}
     
     temples = await temples_collection.find(query).to_list(100)
-    return temples
+    return serialize_doc(temples)
 
 @app.post("/api/trip-plan", response_model=TripPlan)
 async def generate_trip_plan(request: TripPlanRequest):
