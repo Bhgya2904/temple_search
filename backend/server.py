@@ -223,7 +223,7 @@ async def get_temple(temple_id: str):
     temple = await temples_collection.find_one({"id": temple_id})
     if not temple:
         raise HTTPException(status_code=404, detail="Temple not found")
-    return temple
+    return serialize_doc(temple)
 
 @app.get("/api/search/temples")
 async def search_temples(q: str = "", state: str = "", deity: str = ""):
