@@ -48,7 +48,7 @@ function Homepage() {
     try {
       const params = new URLSearchParams();
       if (searchQuery) params.append('q', searchQuery);
-      if (selectedState) params.append('state', selectedState);
+      if (selectedState && selectedState !== 'all') params.append('state', selectedState);
       
       const response = await axios.get(`${API_BASE_URL}/api/search/temples?${params.toString()}`);
       setFilteredTemples(response.data);
