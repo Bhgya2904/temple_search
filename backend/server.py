@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 from motor.motor_asyncio import AsyncIOMotorClient
 from emergentintegrations.llm.chat import LlmChat, UserMessage
 import json
+from bson import ObjectId
 
 # Load environment variables
 load_dotenv()
