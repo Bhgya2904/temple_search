@@ -216,7 +216,7 @@ async def root():
 @app.get("/api/temples", response_model=List[Temple])
 async def get_all_temples():
     temples = await temples_collection.find({}).to_list(1000)
-    return temples
+    return serialize_doc(temples)
 
 @app.get("/api/temples/{temple_id}", response_model=Temple)
 async def get_temple(temple_id: str):
